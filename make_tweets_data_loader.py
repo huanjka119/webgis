@@ -8,13 +8,14 @@ import csv
 sqlfile = open('load_tweets.sql', 'w')
 insert_cmd = """INSERT INTO tweets VALUES (
   '{0}',
-  $slit${1}$slit$
+  ST_SetSRID(ST_MakePoint({1}, {2}), 4326),
+  $slit${3}$slit$
 );
 """
 
 with open('twitter_sm.tsv') as tsvfile:
     tsvreader = csv.reader(tsvfile, delimiter='\t')
     for line in tsvreader:
-        sqlfile.write(insert_cmd.format(line[0], line[-1]))
+        sqlfile.write(insert_cmd.format(line[0], line[5], line[6], line[-1]))
 
 sqlfile.close()

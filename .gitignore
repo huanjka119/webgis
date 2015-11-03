@@ -1,3 +1,7 @@
 # Data Directory #
 ##################
 data
+
+# Python Generated SQL Files #
+##############################
+load_tweets.sql
